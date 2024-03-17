@@ -62,3 +62,8 @@ Run your test:
 curl -v $(python3.10 -m test)
 ```
 
+You can verify that your original data is still the same after the call of the Lambda function:
+
+```bash
+mc cat myminio/raw-data/testobject
+```
