@@ -8,8 +8,7 @@ I've made this simple project to have a better understanding of [Minio's Object 
 - [docker-compose](https://docs.docker.com/compose/) (1.29.2)
 - A working [Minio+Keycloak instance](https://github.com/cht42/minio-keycloak) with [minio docker image](https://quay.io/repository/minio/minio?tab=tags&tag=latest) (RELEASE.2022-01-03T18-22-58Z) and [keycloak docker image](https://quay.io/repository/keycloak/keycloak) (15.0.0)
 - [Minio Client](https://github.com/minio/mc)
-
-Python3.10
+- Python3.10
 
 ## API / Lambda handler setup
 
@@ -34,7 +33,7 @@ And then restart your minio service.
 
 ## Test your handler
 
-Set up your env variable in `.env`: 
+Set up your environement variables in `.env`: 
 
 ```bash
 cp .env.example .env
