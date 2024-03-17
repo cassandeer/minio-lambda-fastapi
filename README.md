@@ -30,6 +30,8 @@ MINIO_LAMBDA_WEBHOOK_ENABLE_function=on
 MINIO_LAMBDA_WEBHOOK_ENDPOINT_function=http://172.17.0.1:10666
 ```
 
+And then restart your minio service.
+
 ## Test your handler
 
 Set up your env variable in `.env`: 
