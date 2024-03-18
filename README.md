@@ -60,6 +60,6 @@ Print the presigned URL that your Lambda handler have generated:
 python3.10 -m test
 ```
 
-You can do a `GET` request on this newly generated presigned url to see your new thumbnail. In my case, I've used [Insomnia](https://docs.insomnia.rest/insomnia/install):
+You can do a `GET` request on this newly generated presigned url to see your new thumbnail, or even access to the data in your browser. In my case, I've used [Insomnia](https://docs.insomnia.rest/insomnia/install):
 
 ![insomnia screenshot](https://github.com/cassandeer/minio-lambda-fastapi/blob/main/example/insomnia_example.png?raw=true)
