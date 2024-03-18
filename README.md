@@ -1,6 +1,6 @@
 # minio-lambda-fastapi
 
-I've made this simple project to have a better understanding of [Minio's Object Lambda](https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html). My lambda function transforms a text content in upper case.
+I've made this simple project to have a better understanding of [Minio's Object Lambda](https://min.io/docs/minio/linux/developers/transforms-with-object-lambda.html). My lambda function generates a thumbnail from an image.
 
 ## Requirements
 
@@ -47,24 +47,20 @@ mc alias set myminio/ http://localhost:9000 <minio_user> <minio_password>
 mc mb myminio/raw-data
 ```
 
-Create a new object and put it in your newly created bucket:
+Find a picture and put it in your newly created bucket:
 
 ```bash
-cat > testobject << EOF
-MinIO is a High Performance Object Storage released under GNU Affero General Public License v3.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.
-EOF
-
-mc cp testobject myminio/raw-data/
+mc cp cat.png myminio/raw-data/
 ```
+> For this example, I've used a picture of a cat
 
-Run your test:
+Print the presigned URL that your Lambda handler have generated:
 
 ```bash
-curl -v $(python3.10 -m test)
+python3.10 -m test
 ```
 
-You can verify that your original data is still the same after the call of the Lambda function:
+You can do a `GET` request on this newly generated presigned url to see your new thumbnail. In my case, I've used [Insomnia](https://docs.insomnia.rest/insomnia/install)
 
-```bash
-mc cat myminio/raw-data/testobject
-```
+![insomnia screenshot](example/insomnia_examples.png)
+

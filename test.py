@@ -109,7 +109,7 @@ if __name__ == "__main__":
     # Generate presigned GET url with lambda function
     presigned_url = minio_client.presigned_get_object(
         "raw-data",
-        "testobject",
+        "cat.png",
         expires=timedelta(hours=2),
         response_headers=reqParams
     )

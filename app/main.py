@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import Response
 import requests
+from PIL import Image
+from io import BytesIO
 
 app = FastAPI()
 
@@ -19,10 +21,13 @@ async def get_webhook(event: dict):
 
     # Get the original S3 object using the presigned URL
     r = requests.get(s3_url)
-    original_object = r.content.decode('utf-8')
+    image = Image.open(BytesIO(r.content))
 
-    # Transform the text in the object by swapping the case of each char
-    transformed_object = original_object.upper()
+    # Generate a thumbnail from the original S3 object
+    thumbnail_size = (100, 100)
+    image.thumbnail(thumbnail_size)
+    thumbnail_bytes = BytesIO()
+    image.save(thumbnail_bytes, format='PNG')
 
     # Return the object back to Object Lambda, with required headers
     # This sends the transformed data to MinIO
@@ -31,7 +36,7 @@ async def get_webhook(event: dict):
         'x-amz-request-route': request_route,
         'x-amz-request-token': request_token
     }
-    return Response(transformed_object, status_code=200, headers=headers)
+    return Response(content=thumbnail_bytes.getvalue(), status_code=200, headers=headers, media_type="image/png")
 
 @app.exception_handler(400)
 async def bad_request_exception_handler(request, exc):
